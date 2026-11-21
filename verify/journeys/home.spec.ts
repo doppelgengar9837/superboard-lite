@@ -14,3 +14,5 @@ test('home: a user opens the app and sees the product and no errors', async ({ p
   await expect(page.getByText('Boards of snapshot widgets that refresh on a schedule.')).toBeVisible()
   expect(problems).toEqual([])
 })
+
+// rehearsal: harmless comment, only here to touch a code-owner path
