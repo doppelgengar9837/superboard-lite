@@ -12,3 +12,5 @@ Closes #
 
 ## Risk tier
 <!-- tier-0 / tier-1 / tier-2. See AGENTS.md "Risk tiers". -->
+
+<!-- Governance rehearsal: this file is a code-owner path (.github/). -->
