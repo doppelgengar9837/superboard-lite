@@ -40,7 +40,7 @@ export default tseslint.config(
   },
   { files: ['**/*.js'], ...tseslint.configs.disableTypeChecked },
   {
-    files: ['*.config.{js,ts}', 'e2e/**/*.ts'],
+    files: ['*.config.{js,ts}', 'e2e/**/*.ts', 'verify/**/*.ts'],
     languageOptions: { globals: { ...globals.node } },
   },
 )

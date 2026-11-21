@@ -13,5 +13,14 @@ export default defineConfig({
     reuseExistingServer: !process.env['CI'],
     timeout: 120_000,
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [
+    // Author-written tests. `pnpm test:e2e` runs only this project.
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    // Independent journeys (docs/ai/adr/0004-verifier.md). `pnpm verify` runs only this project.
+    {
+      name: 'verify',
+      testDir: './verify/journeys',
+      use: { ...devices['Desktop Chrome'], screenshot: 'on', trace: 'retain-on-failure' },
+    },
+  ],
 })

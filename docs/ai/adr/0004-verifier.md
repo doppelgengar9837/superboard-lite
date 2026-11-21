@@ -30,7 +30,14 @@ pstack's verifier compares parent against head, carries a verdict across rebases
 2. A normal PR turns it green and auto-merges.
 3. A new commit reruns it, and the SHA in `verify-report.json` equals the PR head SHA.
 4. A Tier 1 PR that touches `verify/` is blocked by code-owner review.
-5. Journeys cover only what exists (home page visible; time comes from the `Clock`). Nothing implies coverage of unbuilt features.
+5. Journeys cover only what exists. P1 has one: the home page shows the product and logs no errors. The draft also listed "time comes from the `Clock`", but no UI reads the clock yet, so a user-level journey cannot exist; it is deferred until the first feature that shows time. Nothing implies coverage of unbuilt features.
+
+## Built in P1 (2026-11-21)
+- `verify/report.ts` (`buildReport`, unit-tested first): FAIL unless every journey passed, at least one ran, and the head SHA is known. Skipped, timed-out and interrupted count as FAIL.
+- `verify/reporter.ts`: Playwright reporter that writes `verify-report/verify-report.json` and forces a non-zero exit on FAIL, even when Playwright itself passed (missing SHA).
+- `verify/journeys/home.spec.ts`, run by a second Playwright project `verify`; `pnpm test:e2e` now runs only the `chromium` project.
+- `pnpm verify`; CI job `verify` with `VERIFY_HEAD_SHA` from the PR head, uploading `verify-report` and `test-results`.
+- `playwright.config.ts` added to CODEOWNERS: it defines what the verify project runs, so the author must not be able to change it.
 
 ## Order
 1. This ADR (Tier 0).

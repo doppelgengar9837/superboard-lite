@@ -14,11 +14,13 @@ _Last updated: 2026-11-21 (P0 closed except observations; P1 verifier designed, 
 - pstack playbook policy decided (hybrid): see `docs/ai/pstack-playbooks.md`. Enabled: `shipping`, `worktree-cleanup` steps 1-5. Deferred: `autopilot-full`, `autopilot-stack`.
 
 ## Next
-1. P1 verifier, per `docs/ai/adr/0004-verifier.md`: failing test first, then the `verify/` engine and workflow (Tier 2, ironlu approves).
-2. After the `verify` job has run once, Luis adds it to the ruleset's required checks; then rehearsal PRs (red, green, new commit, Tier 1 touching `verify/`).
-3. Observe strict mode: open two Tier 0 PRs at once and record what happens when the second one is behind main.
-4. Try pstack skills one at a time on a real task and record which work in Claude Code (only the install, `setup-pstack` and the rule loading are verified so far).
-5. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
+1. Tier 2 PR with the verify engine (ironlu approves). It also adds the CI job `verify`; the job must run once on that PR before it can be a required check.
+2. Luis adds `verify` to the ruleset's required checks, then rehearsal PRs: regression (red, cannot merge), normal (green, auto-merge), new commit (rerun, SHA matches), Tier 1 PR touching `verify/` (blocked).
+3. Generate the project verification skill with pstack `create-verification-skill` (Tier 2), then update `pstack-playbooks.md` (`shipping` gap closes).
+4. After P1: consider an agent verifier like pstack's (needs credential and cost decisions).
+5. Observe strict mode: open two Tier 0 PRs at once and record what happens when the second one is behind main.
+6. Try pstack skills one at a time on a real task and record which work in Claude Code.
+7. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
 
 ## Open questions
 - **Before any autopilot run, remind Luis about the credential finding and record the answer in `decisions.tsv`.**
