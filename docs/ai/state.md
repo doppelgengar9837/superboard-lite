@@ -1,9 +1,9 @@
 # State
 
-_Last updated: 2026-11-21 (P1 verify gate rehearsed; verification skill next)_
+_Last updated: 2026-11-21 (P1 verify gate rehearsed; verification skill added)_
 
 ## Where we are
-- Phase: **P0 foundation** done; **P1 verifier** engine and gate done and rehearsed (ADR 0004); verification skill still to do.
+- Phase: **P0 foundation** done; **P1 verifier** engine and gate done and rehearsed (ADR 0004); verification skill added (PR #17).
 - Verified on Mac (Node 24, pnpm 12.21): `pnpm check`, `pnpm build`, `pnpm test:e2e` all pass.
 - Repo: public `doppelgengar9837/superboard-lite` (HTTPS remote); `ironlu` is a collaborator with write access.
 - CI on GitHub: `check (lint, typecheck, unit, build)`, `e2e (playwright)`, `conventional-title` all pass.
@@ -14,11 +14,12 @@ _Last updated: 2026-11-21 (P1 verify gate rehearsed; verification skill next)_
 - pstack playbook policy decided (hybrid): see `docs/ai/pstack-playbooks.md`. Enabled: `shipping`, `worktree-cleanup` steps 1-5. Deferred: `autopilot-full`, `autopilot-stack`.
 
 ## Next
-1. Generate the project verification skill with pstack `create-verification-skill` (Tier 2), then update `pstack-playbooks.md` (`shipping` gap closes).
+1. Add a favicon in a product PR (finding in `findings-queue.md`), then drop the allowance in the skill's `features/home.md`.
 2. After P1: consider an agent verifier like pstack's (needs credential and cost decisions).
 3. Observe strict mode: open two Tier 0 PRs at once and record what happens when the second one is behind main.
 4. Try pstack skills one at a time on a real task and record which work in Claude Code.
 5. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
+6. Start building the first product feature (P2); add its journey in `verify/journeys/` and its file in the skill's `features/` in the same Tier 2 PR.
 
 ## Open questions
 - **Before any autopilot run, remind Luis about the credential finding and record the answer in `decisions.tsv`.**
