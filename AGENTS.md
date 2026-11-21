@@ -26,7 +26,7 @@ Stack: Vite + React + TypeScript (strict), Vitest, Playwright, ESLint, pnpm, Ver
 - Test first: write a failing test, then the fix. Tests assert behaviour, not implementation.
 - One concern per PR. Branch `type/short-name`. Commits and PR titles follow Conventional Commits: `type(scope): description` (scope kebab-case, header ≤ 100 chars). The PR title becomes the squash commit.
 - Fill in the PR template. Reviewers read the evidence section.
-- **Never edit governance paths without a human**: `.github/`, `verify/`, `.claude/`, `AGENTS.md`, `CLAUDE.md`, lint/ts/commit configs, `package.json`, lockfile, `vercel.json`. These are Tier 2 (see below) and listed in CODEOWNERS.
+- **Never edit governance paths without a human**: `.github/`, `verify/`, `.claude/`, `AGENTS.md`, `CLAUDE.md`, lint/ts/commit configs, `playwright.config.ts`, `package.json`, lockfile, `vercel.json`. These are Tier 2 (see below) and listed in CODEOWNERS.
 - The agent that wrote a change never declares it verified. A separate verifier does, on the exact head commit.
 - When the same mistake happens twice, fix it in this order: make it impossible by design → add a lint rule or test → write a rule here. Do not just add prose.
 - Irreversible actions (deleting data, force-push, changing repo settings) need a human. Reversible ones: proceed, do not stop to ask.

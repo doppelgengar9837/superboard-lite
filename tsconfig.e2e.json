@@ -14,5 +14,5 @@
     "noUncheckedIndexedAccess": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["playwright.config.ts", "e2e"]
+  "include": ["playwright.config.ts", "e2e", "verify"]
 }

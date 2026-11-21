@@ -26,6 +26,7 @@ dist-ssr
 # test + deploy artifacts
 coverage
 playwright-report
+verify-report
 test-results
 .vercel
 .pnpm-store

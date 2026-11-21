@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --project=chromium",
+    "verify": "VERIFY_HEAD_SHA=${VERIFY_HEAD_SHA:-$(git rev-parse HEAD)} playwright test --project=verify --reporter=list,./verify/reporter.ts",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "prepare": "git config core.hooksPath .husky || true"
   },

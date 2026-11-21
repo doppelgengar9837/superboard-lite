@@ -29,6 +29,32 @@ jobs:
       - run: pnpm test
       - run: pnpm build
 
+  # Independent verifier (docs/ai/adr/0004-verifier.md). Required check on the PR head SHA.
+  # No path filter on purpose: a skipped required check stays pending forever.
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    env:
+      VERIFY_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm verify
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verify-evidence
+          path: |
+            verify-report
+            test-results
+          retention-days: 14
+
   e2e:
     name: e2e (playwright)
     runs-on: ubuntu-latest

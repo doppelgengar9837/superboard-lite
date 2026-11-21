@@ -8,6 +8,7 @@
 /eslint.config.js         @ironlu
 /commitlint.config.js     @ironlu
 /tsconfig*.json           @ironlu
+/playwright.config.ts     @ironlu
 /package.json             @ironlu
 /pnpm-lock.yaml           @ironlu
 /vercel.json              @ironlu
