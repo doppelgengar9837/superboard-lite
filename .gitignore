@@ -28,5 +28,6 @@ coverage
 playwright-report
 test-results
 .vercel
+.pnpm-store
 .env*
 !.env.example
