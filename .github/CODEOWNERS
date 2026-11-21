@@ -1,0 +1,14 @@
+# Governance paths: the author agent must not change these without a human.
+# Enforced once the ruleset requires code-owner review. Tier 2 in the plan.
+/.github/                 @ironlu
+/verify/                  @ironlu
+/.claude/                 @ironlu
+/AGENTS.md                @ironlu
+/CLAUDE.md                @ironlu
+/eslint.config.js         @ironlu
+/commitlint.config.js     @ironlu
+/tsconfig*.json           @ironlu
+/package.json             @ironlu
+/pnpm-lock.yaml           @ironlu
+/vercel.json              @ironlu
+/.husky/                  @ironlu
