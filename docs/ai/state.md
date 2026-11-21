@@ -1,6 +1,6 @@
 # State
 
-_Last updated: 2026-11-21 (P0 closing: pstack merged, husky installed, strict checks on)_
+_Last updated: 2026-11-21 (P0 closing: pstack merged, native git hooks PR open, strict checks on)_
 
 ## Where we are
 - Phase: **P0 foundation**, closing.
@@ -9,7 +9,7 @@ _Last updated: 2026-11-21 (P0 closing: pstack merged, husky installed, strict ch
 - CI on GitHub: `check (lint, typecheck, unit, build)`, `e2e (playwright)`, `conventional-title` all pass.
 - Ruleset `main-protection` (active, no bypass): PR required, squash only, linear history, 3 required checks, **strict (branch must be up to date with main)**, code-owner review, no deletion or force-push. Strict was turned on 2026-11-21; its effect on two PRs open at once is not yet observed.
 - PR rehearsal done: direct push to main rejected; Tier 0 PRs auto-merged on checks alone; Tier 2 PRs (#2, #5) stayed BLOCKED with all checks green until ironlu approved by hand, then auto-merged.
-- Husky: installed locally on 2026-11-21 (`pnpm exec husky` set `core.hooksPath=.husky/_`). A bad commit message is rejected by the hook; a conventional one passes. This is an approved exception to the shared "do not modify git config" rule, see `decisions.tsv`. New clones need `pnpm install` (the `prepare` script runs husky).
+- Git hooks: no husky. `.husky/` is a tracked native hooks dir (`core.hooksPath=.husky`, set by the `prepare` script on `pnpm install`), so every worktree has the commit-msg hook (PR pending ironlu). Reason: husky's generated `.husky/_` is untracked, and a fresh worktree silently ran no hooks. This is an approved exception to the shared "do not modify git config" rule.
 - pstack: upstream `cursor/plugins`, reviewed at `d42aff0` (0.15.46), installed at project scope, merged to main in PR #5. Model rule is `.claude/rules/pstack-models.md` (budget large, xhigh). User-level `~/.claude/settings.json` and `~/.claude/rules/` untouched; plugin files and the marketplace registry still live in the shared `~/.claude/plugins/`.
 - pstack playbook policy decided (hybrid): see `docs/ai/pstack-playbooks.md`. Enabled: `shipping`, `worktree-cleanup` steps 1-5. Deferred: `autopilot-full`, `autopilot-stack`.
 
