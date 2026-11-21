@@ -6,5 +6,5 @@ Date: 2026-11-21. Status: accepted.
 - **TypeScript pinned to ~6.** typescript-eslint 8.73 refuses TypeScript 7.0. Revisit when it supports 7.1+ (tracking: typescript-eslint issue 10940).
 - **Vitest + Testing Library (jsdom)** for unit/component tests; **Playwright** (Chromium only) for e2e and later the verify CLI.
 - **pnpm**, Node 22.
-- **Conventional Commits** via commitlint (husky `commit-msg` locally, PR-title check in CI).
+- **Conventional Commits** via commitlint (`.husky/commit-msg` as a native git hook locally, PR-title check in CI).
 - Retries are disabled in Playwright: a flaky test is a bug.
