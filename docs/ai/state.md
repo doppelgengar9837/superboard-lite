@@ -1,9 +1,9 @@
 # State
 
-_Last updated: 2026-11-21 (P0 closed except observations; P1 verifier designed, ADR 0004)_
+_Last updated: 2026-11-21 (P1 verify gate rehearsed; verification skill next)_
 
 ## Where we are
-- Phase: **P0 foundation** done; **P1 verifier** starting (design in ADR 0004).
+- Phase: **P0 foundation** done; **P1 verifier** engine and gate done and rehearsed (ADR 0004); verification skill still to do.
 - Verified on Mac (Node 24, pnpm 12.21): `pnpm check`, `pnpm build`, `pnpm test:e2e` all pass.
 - Repo: public `doppelgengar9837/superboard-lite` (HTTPS remote); `ironlu` is a collaborator with write access.
 - CI on GitHub: `check (lint, typecheck, unit, build)`, `e2e (playwright)`, `conventional-title` all pass.
@@ -14,16 +14,16 @@ _Last updated: 2026-11-21 (P0 closed except observations; P1 verifier designed, 
 - pstack playbook policy decided (hybrid): see `docs/ai/pstack-playbooks.md`. Enabled: `shipping`, `worktree-cleanup` steps 1-5. Deferred: `autopilot-full`, `autopilot-stack`.
 
 ## Next
-1. Rehearse the `verify` gate (it is a required check since 2026-11-21): a regression PR (red, cannot merge), a normal PR (green, auto-merge; this docs PR is the first), a new commit (rerun, report SHA equals PR head), a Tier 1 PR touching `verify/` (blocked by code-owner review).
-2. Generate the project verification skill with pstack `create-verification-skill` (Tier 2), then update `pstack-playbooks.md` (`shipping` gap closes).
-3. After P1: consider an agent verifier like pstack's (needs credential and cost decisions).
-4. Observe strict mode: open two Tier 0 PRs at once and record what happens when the second one is behind main.
-5. Try pstack skills one at a time on a real task and record which work in Claude Code.
-6. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
+1. Generate the project verification skill with pstack `create-verification-skill` (Tier 2), then update `pstack-playbooks.md` (`shipping` gap closes).
+2. After P1: consider an agent verifier like pstack's (needs credential and cost decisions).
+3. Observe strict mode: open two Tier 0 PRs at once and record what happens when the second one is behind main.
+4. Try pstack skills one at a time on a real task and record which work in Claude Code.
+5. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
 
 ## Open questions
 - **Before any autopilot run, remind Luis about the credential finding and record the answer in `decisions.tsv`.**
 - Security finding: the `gh` credentials of both accounts live on this machine, so an agent can technically approve as ironlu. Only the permission classifier stopped it in PR #2. The code-owner gate is not enforced against local agents; consider an agent environment that holds only the doppelgengar9837 credential.
+- Rehearsed 2026-11-21: regression PR red and refused; new commit reruns on the new SHA; Tier 1 PR touching `verify/` blocked by code-owner review; normal PR green and auto-merged (evidence in `decisions.tsv`).
 - Tier 1 now needs the `verify` check, but it has one journey (home page); real coverage grows with features.
 - CODEOWNERS stays on ironlu for now (see `decisions.tsv`); revisit together with the credential finding.
 - Does Vercel preview protection block the verifier? (P4)
