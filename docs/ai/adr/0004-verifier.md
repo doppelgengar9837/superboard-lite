@@ -1,6 +1,6 @@
 # 0004 Verifier
 
-Date: 2026-11-21. Status: accepted (Luis confirmed the draft and all four choices below).
+Date: 2026-11-21. Status: accepted and implemented; P1 closed 2026-11-21 (Luis confirmed the draft and all four choices below).
 
 ## Decision
 The verifier is two parts: an **engine** that drives the built app the way a user would and records evidence, and a **gate** that makes its result a required status check on the exact head SHA. P1 builds a deterministic verifier that runs in CI. No LLM verdict yet.

@@ -1,9 +1,9 @@
 # State
 
-_Last updated: 2026-11-21 (P1 done: verify gate, rehearsals, verification skill; favicon fixed)_
+_Last updated: 2026-11-21 (P1 closed; handoff to a new session for P2, credentials, agent verifier)_
 
 ## Where we are
-- Phase: **P0 foundation** done; **P1 verifier** engine and gate done and rehearsed (ADR 0004); verification skill added (PR #17).
+- Phase: **P0 foundation** and **P1 verifier** are closed (2026-11-21). P2 (first product feature) has not started.
 - Verified on Mac (Node 24, pnpm 12.21): `pnpm check`, `pnpm build`, `pnpm test:e2e` all pass.
 - Repo: public `doppelgengar9837/superboard-lite` (HTTPS remote); `ironlu` is a collaborator with write access.
 - CI on GitHub: `check (lint, typecheck, unit, build)`, `e2e (playwright)`, `conventional-title` all pass.
@@ -14,13 +14,17 @@ _Last updated: 2026-11-21 (P1 done: verify gate, rehearsals, verification skill;
 - pstack: upstream `cursor/plugins`, reviewed at `d42aff0` (0.15.46), installed at project scope, merged to main in PR #5. Model rule is `.claude/rules/pstack-models.md` (budget large, xhigh). User-level `~/.claude/settings.json` and `~/.claude/rules/` untouched; plugin files and the marketplace registry still live in the shared `~/.claude/plugins/`.
 - pstack playbook policy decided (hybrid): see `docs/ai/pstack-playbooks.md`. Enabled: `shipping`, `worktree-cleanup` steps 1-5. Deferred: `autopilot-full`, `autopilot-stack`.
 
-## Next
-1. Decide whether `verify` should also catch what only a headed browser sees (the favicon 404 was invisible to the headless journey): add a check that every declared resource loads, or accept the gap.
-2. After P1: consider an agent verifier like pstack's (needs credential and cost decisions).
-3. Observe strict mode: open two Tier 0 PRs at once and record what happens when the second one is behind main.
-4. Try pstack skills one at a time on a real task and record which work in Claude Code.
-5. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
-6. Start building the first product feature (P2); add its journey in `verify/journeys/` and its file in the skill's `features/` in the same Tier 2 PR.
+## Next (handoff to the next session)
+Scope of the session that closed P1: P0 and P1 only. The next session picks up the items below, in this order of dependency.
+1. **Credentials first.** Before any autopilot or unattended run: raise the credential finding (open questions) with Luis, decide how an agent environment gets only the doppelgengar9837 credential, record it in `decisions.tsv`. There is a memory entry for this reminder.
+2. **P2: first product feature.** Each feature needs its journey in `verify/journeys/` and its file in the skill's `features/` (Tier 2, ironlu approves). Test first.
+3. **Agent verifier** like pstack's (fresh-context agent, `PASS` / `PASS+NOTES` / `FAIL`): needs the credential decision and a cost limit. Today the verdict is a deterministic CI job only (ADR 0004).
+4. Decide whether `verify` should catch what only a headed browser sees (the favicon 404 was invisible to the headless journey): check that every declared resource loads, or accept the gap.
+5. Observe strict mode with two PRs open at once (not yet observed).
+6. Try pstack skills one at a time on a real task and record which work in Claude Code. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
+7. P4: does Vercel preview protection block the verifier?
+
+Unverified at the close of P1: the verification skill has not been run by a fresh agent session that never saw this conversation; `create-verification-skill` was followed by hand, not run as a skill; the full plan lives in Luis's Claude project, outside the repo, so P2 onward is mapped only from what the repo records.
 
 ## Open questions
 - **Before any autopilot run, remind Luis about the credential finding and record the answer in `decisions.tsv`.**
