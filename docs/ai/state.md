@@ -28,7 +28,7 @@ Three Tier 2 PRs, independent branches off `main`, approved by ironlu and merged
 - Sandbox note for sessions like this one: `git push` and `gh` need `~/.config/gh`, which the sandbox denies, so those calls ran unsandboxed. PRs were opened with `GH_TOKEN` set to the doppelgengar9837 token for that one command; `gh auth switch` was not used.
 
 ## Next (handoff to the next session)
-**Next step: plan v5, P0.5 "restore step one".** Before doing it, read the plan's "方針" (policy) section first. The plan is `claude/superboard-lite-pstack-plan-2026-11-21.md` in Luis's Claude Project; it is not in this repo, so what P0.5 contains is not recorded here.
+**Next step: plan v5, P0.5 "restore step one".** Before doing it, read the plan's "方針" (policy) section first. The condensed plan is `docs/ai/plan.md` in this repo; the full plan v5 is `claude/superboard-lite-pstack-plan-2026-11-21.md` in Luis's Claude Project and is not in this repo.
 New sessions read `docs/ai/plan.md` first (the condensed plan: policy, phases, gates); the next phase there is P0.5.
 
 The items below were the handoff from the close of P1. They are still open; the plan decides their order relative to P0.5.
@@ -41,7 +41,7 @@ The items below were the handoff from the close of P1. They are still open; the 
 7. P4: does Vercel preview protection block the verifier?
 8. Usage measurement: Luis decides whether to run one pinned ccusage trial (`docs/ai/usage-measurement.md`).
 
-Unverified at the close of P1: the verification skill has not been run by a fresh agent session that never saw this conversation; `create-verification-skill` was followed by hand, not run as a skill; the full plan lives in Luis's Claude project, outside the repo, so P2 onward is mapped only from what the repo records.
+Unverified at the close of P1: the verification skill has not been run by a fresh agent session that never saw this conversation; `create-verification-skill` was followed by hand, not run as a skill; the full plan lived in Luis's Claude project, outside the repo, so P2 onward was mapped only from what the repo recorded (since 2026-11-22 the condensed plan is `docs/ai/plan.md`).
 
 ## Open questions
 - **Before any autopilot run, remind Luis about the credential finding and record the answer in `decisions.tsv`.**
