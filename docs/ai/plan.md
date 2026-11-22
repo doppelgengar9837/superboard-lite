@@ -2,7 +2,7 @@
 
 這份是 repo 內的精簡計劃，給新 session 讀。只放方針、階段、門檻與目前狀態。
 目前進度與下一步以 `docs/ai/state.md` 為準；決策紀錄在 `docs/ai/decisions.tsv`。
-本檔屬 Tier 1。更新時要同步 `state.md`。
+本檔屬 Tier 0（文件）。更新時要同步 `state.md`。
 
 ## 目的
 
