@@ -24,6 +24,9 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Deterministic: new eslint-disable / @ts-ignore / @ts-expect-error / .skip / .only / .fixme fail here
+      # unless verify/suppressions-baseline.json (a code-owner path) allows them.
+      - run: pnpm check:suppressions
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
