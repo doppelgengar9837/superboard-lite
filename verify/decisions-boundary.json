@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "legacyRows": 30,
+  "legacySha256": "660bf3db8ffc3a739ad909f5b0ecef8f0c7844e05fdb2df125151c534e052eb5",
+  "note": "Rows 1 to 30 of docs/ai/decisions.tsv (up to 2026-11-21T19:00+08:00) were typed by hand and their times are estimates. They are frozen by this hash and exempt from the time rules. Every later row is checked. Why and how: docs/ai/adr/0005-decision-log.md. Editing this file needs a code-owner."
+}

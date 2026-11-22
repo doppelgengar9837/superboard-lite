@@ -13,7 +13,9 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test --project=chromium",
     "verify": "VERIFY_HEAD_SHA=${VERIFY_HEAD_SHA:-$(git rev-parse HEAD)} playwright test --project=verify --reporter=list,./verify/reporter.ts",
-    "check": "pnpm lint && pnpm typecheck && pnpm test",
+    "check:decisions": "node verify/check-decisions.ts",
+    "decision": "node verify/log-decision.ts",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm check:decisions",
     "prepare": "git config core.hooksPath .husky || true"
   },
   "dependencies": {

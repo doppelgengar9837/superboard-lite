@@ -14,7 +14,7 @@ Stack: Vite + React + TypeScript (strict), Vitest, Playwright, ESLint, pnpm, Ver
 ## Start of every session
 1. Read `docs/ai/state.md` (where we are, what is next).
 2. Read the relevant file in `docs/ai/feature-map/` before touching a feature.
-3. At the end, update `state.md` and append rows to `docs/ai/decisions.tsv`. A session that ends without this loses work, because nothing else carries over.
+3. At the end, update `state.md` and record decisions with `pnpm decision -- --phase P2 --decision "..." --reason "..." --evidence "..." --result "..."`. The command stamps the time from the system clock; never type a time or edit `decisions.tsv` by hand (CI runs `pnpm check:decisions`; see `docs/ai/adr/0005-decision-log.md`). A session that ends without this loses work, because nothing else carries over.
 
 ## Architecture rules (checked by tooling where possible)
 - **Time comes from an injected `Clock`** (`src/lib/clock.ts`). Never call `Date.now()`, `new Date()` or `Math.random()` elsewhere; ESLint fails the build. Reason: verification must be reproducible.
