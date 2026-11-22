@@ -267,6 +267,13 @@ describe('CLIs on a throwaway copy', () => {
     expect(written).toBeLessThanOrEqual(after)
   })
 
+  it('log-decision accepts the "--" that pnpm forwards (pnpm decision -- --phase ...)', () => {
+    const { file, boundary } = sandbox()
+    const { status, output } = run('log-decision.ts', ['--', '--file', file, '--boundary', boundary, ...flags])
+    expect(status, output).toBe(0)
+    expect(readFileSync(file, 'utf8').trimEnd().split('\n').at(-1)).toContain('\tP2\tUse X\t')
+  })
+
   it('log-decision has no way to pass a time: --time is refused and nothing is written', () => {
     const { file, boundary } = sandbox()
     const { status, output } = run('log-decision.ts', ['--file', file, '--boundary', boundary, ...flags, '--time', '2020-01-01T00:00:00+08:00'])

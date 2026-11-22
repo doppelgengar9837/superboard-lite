@@ -9,8 +9,13 @@ import { systemIsoTime, systemNowMs } from './system-time.ts'
 // `--boundary` exist for tests.
 const root = resolve(import.meta.dirname, '..')
 
+// pnpm forwards the "--" in `pnpm decision -- --phase ...`; strip one leading "--" so both spellings work.
+const argv = process.argv.slice(2)
+if (argv[0] === '--') argv.shift()
+
 try {
   const { values } = parseArgs({
+    args: argv,
     options: {
       phase: { type: 'string' },
       decision: { type: 'string' },
