@@ -1,6 +1,6 @@
 # State
 
-_Last updated: 2026-11-21 (P1 closed; handoff to a new session for P2, credentials, agent verifier)_
+_Last updated: 2026-11-22 (P1 closed 2026-11-21; governance hardening in three PRs awaiting ironlu; P2, credentials and the agent verifier still next)_
 
 ## Where we are
 - Phase: **P0 foundation** and **P1 verifier** are closed (2026-11-21). P2 (first product feature) has not started.
@@ -14,6 +14,16 @@ _Last updated: 2026-11-21 (P1 closed; handoff to a new session for P2, credentia
 - pstack: upstream `cursor/plugins`, reviewed at `d42aff0` (0.15.46), installed at project scope, merged to main in PR #5. Model rule is `.claude/rules/pstack-models.md` (budget large, xhigh). User-level `~/.claude/settings.json` and `~/.claude/rules/` untouched; plugin files and the marketplace registry still live in the shared `~/.claude/plugins/`.
 - pstack playbook policy decided (hybrid): see `docs/ai/pstack-playbooks.md`. Enabled: `shipping`, `worktree-cleanup` steps 1-5. Deferred: `autopilot-full`, `autopilot-stack`.
 
+## Governance hardening, opened 2026-11-22 (waiting for ironlu)
+Three Tier 2 PRs, independent branches off `main`, none approved, none auto-merged. Luis asked for this scope only: no product work.
+- **A, [#21](https://github.com/doppelgengar9837/superboard-lite/pull/21) `chore(codeowners)`:** `vite.config.ts`, `src/test-setup.ts` and `/vitest.*` become code-owner paths (vitest premise checked: `include` and `setupFiles` are defined in those two files; `vitest.config.*` would override `vite.config.ts`). Test `verify/codeowners.test.ts`, red before.
+- **B, [#22](https://github.com/doppelgengar9837/superboard-lite/pull/22) `ci(suppressions)`:** `pnpm check:suppressions` fails on new `eslint-disable`, `@ts-ignore`, `@ts-expect-error`, `@ts-nocheck`, `.skip`, `.skipIf`, `.only`, `.fixme` in `src/`, `e2e/`, `verify/`. Baseline `verify/suppressions-baseline.json` (one entry: `src/lib/clock.ts`), counts may only go down. Runs as a step of the existing required job `check`, so no ruleset change.
+- **C, [#23](https://github.com/doppelgengar9837/superboard-lite/pull/23) `ci(decision-log)`:** `pnpm decision -- --phase ... --decision ... --reason ... --evidence ... --result ...` writes `decisions.tsv` with the system time (no way to pass a time); `pnpm check:decisions` checks format, non-decreasing time, not later than now. **Rows 1 to 30 have estimated times**: untouched, frozen by hash in `verify/decisions-boundary.json`, exempt from the time rules; every later row is strict (ADR 0005). Also adds `docs/ai/usage-measurement.md` (proposal only) and this update.
+- CI: all four required checks were green on A, B and C before the rehearsals. Rehearsal on B (a skipped test) failed `check` at the `check:suppressions` step with the expected message; on C (a hand-typed 2099 row) failed `check` at `pnpm test` (the test that runs the CLI on the real file). Each was fixed with a plain follow-up commit.
+- **Merge note:** B and C both edit the `check` script in `package.json` and `ci.yml`. Merge A first (no overlap), then B, then update C from `main` (strict requires it) and resolve the small conflict. Ask a session to do the update.
+- From now on, record decisions with `pnpm decision`, not by editing the file.
+- Sandbox note for sessions like this one: `git push` and `gh` need `~/.config/gh`, which the sandbox denies, so those calls ran unsandboxed. PRs were opened with `GH_TOKEN` set to the doppelgengar9837 token for that one command; `gh auth switch` was not used.
+
 ## Next (handoff to the next session)
 Scope of the session that closed P1: P0 and P1 only. The next session picks up the items below, in this order of dependency.
 1. **Credentials first.** Before any autopilot or unattended run: raise the credential finding (open questions) with Luis, decide how an agent environment gets only the doppelgengar9837 credential, record it in `decisions.tsv`. There is a memory entry for this reminder.
@@ -23,6 +33,7 @@ Scope of the session that closed P1: P0 and P1 only. The next session picks up t
 5. Observe strict mode with two PRs open at once (not yet observed).
 6. Try pstack skills one at a time on a real task and record which work in Claude Code. Read `autopilot-stack`, `babysit`, `autonomous-run`, `opening-a-pr` before first use and add rows to `pstack-playbooks.md`.
 7. P4: does Vercel preview protection block the verifier?
+8. Usage measurement: Luis decides whether to run one pinned ccusage trial (`docs/ai/usage-measurement.md`).
 
 Unverified at the close of P1: the verification skill has not been run by a fresh agent session that never saw this conversation; `create-verification-skill` was followed by hand, not run as a skill; the full plan lives in Luis's Claude project, outside the repo, so P2 onward is mapped only from what the repo records.
 

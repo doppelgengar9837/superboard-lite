@@ -30,6 +30,8 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+      # docs/ai/adr/0005-decision-log.md: format, time order and "not in the future" for decisions.tsv.
+      - run: pnpm check:decisions
       - run: pnpm build
 
   # Independent verifier (docs/ai/adr/0004-verifier.md). Required check on the PR head SHA.
