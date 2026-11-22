@@ -26,6 +26,7 @@ Three Tier 2 PRs, independent branches off `main`, none approved, none auto-merg
 
 ## Next (handoff to the next session)
 Scope of the session that closed P1: P0 and P1 only. The next session picks up the items below, in this order of dependency.
+New sessions read `docs/ai/plan.md` first (the condensed plan: policy, phases, gates); the next phase there is P0.5.
 1. **Credentials first.** Before any autopilot or unattended run: raise the credential finding (open questions) with Luis, decide how an agent environment gets only the doppelgengar9837 credential, record it in `decisions.tsv`. There is a memory entry for this reminder.
 2. **P2: first product feature.** Each feature needs its journey in `verify/journeys/` and its file in the skill's `features/` (Tier 2, ironlu approves). Test first.
 3. **Agent verifier** like pstack's (fresh-context agent, `PASS` / `PASS+NOTES` / `FAIL`): needs the credential decision and a cost limit. Today the verdict is a deterministic CI job only (ADR 0004).
