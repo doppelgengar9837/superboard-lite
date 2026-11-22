@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "policy": "Suppressions (eslint-disable, @ts-ignore, @ts-expect-error, @ts-nocheck, .skip, .skipIf, .only, .fixme) in src/, e2e/ and verify/ may only decrease. Counts are per file and kind. A new one fails CI; so does a removed one that is still listed here, so lower or delete the entry in the same change. This file is a code-owner path: a human approves every edit.",
+  "entries": [
+    {
+      "file": "src/lib/clock.ts",
+      "kind": "eslint-disable-next-line",
+      "count": 1,
+      "reason": "The single sanctioned real-time read (docs/ai/adr/0002-clock-injection.md)."
+    }
+  ]
+}
